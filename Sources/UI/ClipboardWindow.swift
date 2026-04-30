@@ -159,10 +159,20 @@ public final class ClipboardWindow: NSPanel {
 
     public func showWindow() {
         refreshItems()
-        selectItem(at: max(0, clipboardManager.items.count - 1))
+        selectItem(at: 0)
         NSApp.activate(ignoringOtherApps: true)
         makeKeyAndOrderFront(nil)
         setupBindings()
+        scrollToTop()
+    }
+
+    private func scrollToTop() {
+        guard let documentView = scrollView.documentView else { return }
+        documentView.layoutSubtreeIfNeeded()
+        let minY = documentView.bounds.height - scrollView.bounds.height
+        let topPoint = NSPoint(x: 0, y: max(0, minY))
+        scrollView.contentView.scroll(to: topPoint)
+        scrollView.reflectScrolledClipView(scrollView.contentView)
     }
 
     private func setupBindings() {
