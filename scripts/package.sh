@@ -82,7 +82,7 @@ generate_icon() {
 # 创建 Info.plist
 create_infoplist() {
     log_info "创建 Info.plist..."
-    cat > "${OUTPUT_DIR}/${APP_NAME}.app/Contents/Info.plist" << 'EOF'
+    cat > "${OUTPUT_DIR}/${APP_NAME}.app/Contents/Info.plist" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
