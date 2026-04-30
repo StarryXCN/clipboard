@@ -4,7 +4,6 @@ set -e
 # 配置
 APP_NAME="Clipboard"
 BUNDLE_ID="com.clipboard.app"
-VERSION="1.0.0"
 BUILD_DIR=".build/release"
 OUTPUT_DIR="."
 EXECUTABLE_NAME="clipboard"
@@ -20,6 +19,16 @@ log_info() {
 
 log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
+}
+
+# 解析命令行参数
+parse_args() {
+    if [ $# -lt 1 ]; then
+        log_error "用法: $0 <VERSION>"
+        log_error "示例: $0 1.0.0"
+        exit 1
+    fi
+    VERSION="$1"
 }
 
 # 检查 iconset 是否存在
@@ -95,7 +104,7 @@ create_infoplist() {
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.0</string>
+    <string>${VERSION}</string>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>LSMinimumSystemVersion</key>
@@ -136,6 +145,7 @@ verify_app() {
 
 # 主流程
 main() {
+    parse_args "$@"
     cd "$(dirname "$0")/.."
     log_info "=== 开始打包 ${APP_NAME}.app ==="
 

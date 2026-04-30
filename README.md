@@ -55,7 +55,8 @@ swift build
 swift build --configuration release
 
 # 一键打包 App
-./scripts/package.sh
+./scripts/package.sh <VERSION>
+# 示例: ./scripts/package.sh 1.0.0
 ```
 
 ### 安装
