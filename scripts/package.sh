@@ -7,6 +7,7 @@ BUNDLE_ID="com.clipboard.app"
 VERSION="1.0.0"
 BUILD_DIR=".build/release"
 OUTPUT_DIR="."
+EXECUTABLE_NAME="clipboard"
 
 # 颜色输出
 RED='\033[0;31m'
@@ -49,12 +50,12 @@ create_app_structure() {
 # 复制可执行文件
 copy_executable() {
     log_info "复制可执行文件..."
-    if [ ! -f "${BUILD_DIR}/${APP_NAME,,}" ]; then
-        log_error "可执行文件不存在: ${BUILD_DIR}/${APP_NAME,,}"
+    if [ ! -f "${BUILD_DIR}/${EXECUTABLE_NAME}" ]; then
+        log_error "可执行文件不存在: ${BUILD_DIR}/${EXECUTABLE_NAME}"
         exit 1
     fi
-    cp "${BUILD_DIR}/${APP_NAME,,}" "${OUTPUT_DIR}/${APP_NAME}.app/Contents/MacOS/"
-    chmod +x "${OUTPUT_DIR}/${APP_NAME}.app/Contents/MacOS/${APP_NAME,,}"
+    cp "${BUILD_DIR}/${EXECUTABLE_NAME}" "${OUTPUT_DIR}/${APP_NAME}.app/Contents/MacOS/"
+    chmod +x "${OUTPUT_DIR}/${APP_NAME}.app/Contents/MacOS/${EXECUTABLE_NAME}"
     log_info "可执行文件复制完成"
 }
 
@@ -121,7 +122,7 @@ sign_app() {
 # 验证打包结果
 verify_app() {
     log_info "验证打包结果..."
-    if [ ! -f "${OUTPUT_DIR}/${APP_NAME}.app/Contents/MacOS/${APP_NAME,,}" ]; then
+    if [ ! -f "${OUTPUT_DIR}/${APP_NAME}.app/Contents/MacOS/${EXECUTABLE_NAME}" ]; then
         log_error "可执行文件不存在"
         exit 1
     fi

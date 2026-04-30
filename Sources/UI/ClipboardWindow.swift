@@ -159,7 +159,7 @@ public final class ClipboardWindow: NSPanel {
 
     public func showWindow() {
         refreshItems()
-        selectItem(at: 0)
+        selectItem(at: max(0, clipboardManager.items.count - 1))
         NSApp.activate(ignoringOtherApps: true)
         makeKeyAndOrderFront(nil)
         setupBindings()
